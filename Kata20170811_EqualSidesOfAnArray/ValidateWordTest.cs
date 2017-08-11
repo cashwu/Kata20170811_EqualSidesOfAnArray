@@ -31,12 +31,12 @@ namespace Kata20170811_EqualSidesOfAnArray
     {
         public int FindEvenIndex(int[] arr)
         {
-            for (int i = 0; i < arr.Length; i++)
+            for (var i = 0; i < arr.Length; i++)
             {
-                var leftSum = arr.Select((a, idx) => idx < i ? a : 0).Sum();
-                var rightSum = arr.Select((a, idx) => idx > i ? a : 0).Sum();
+                var leftItemSum = arr.Select((a, idx) => idx < i ? a : 0).Sum();
+                var rightItemSum = arr.Select((a, idx) => idx > i ? a : 0).Sum();
 
-                if (leftSum == rightSum)
+                if (leftItemSum == rightItemSum)
                 {
                     return i;
                 }
