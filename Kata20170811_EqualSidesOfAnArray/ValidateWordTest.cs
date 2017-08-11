@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Kata20170811_EqualSidesOfAnArray
@@ -9,7 +10,13 @@ namespace Kata20170811_EqualSidesOfAnArray
         [TestMethod]
         public void input_1_2_1_should_return_1()
         {
-            FindEvenIndexShouldBe(1, new[] {1, 2, 1});
+            FindEvenIndexShouldBe(1, new[] { 1, 2, 1 });
+        }
+
+        [TestMethod]
+        public void input_1_2_3_2_1_should_return_2()
+        {
+            FindEvenIndexShouldBe(2, new[] { 1, 2, 3, 2, 1 });
         }
 
         private static void FindEvenIndexShouldBe(int expected, int[] array)
@@ -24,7 +31,18 @@ namespace Kata20170811_EqualSidesOfAnArray
     {
         public int FindEvenIndex(int[] arr)
         {
-            return 1;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                var leftSum = arr.Select((a, idx) => idx < i ? a : 0).Sum();
+                var rightSum = arr.Select((a, idx) => idx > i ? a : 0).Sum();
+
+                if (leftSum == rightSum)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
         }
     }
 }
